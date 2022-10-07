@@ -31,6 +31,7 @@ def login():
 @login_required
 def logout():
     logout_user()
+    flash('You have logged out.', category='success')
     return redirect(url_for('auth.login'))
 
 
@@ -58,11 +59,27 @@ def sign_up():
                             password=generate_password_hash(password1, method='sha256'))
             db.session.add(new_user)
             db.session.commit()
-            flash('Account created! Please login.', category='success')
-            return redirect(url_for('auth.login'))
+            login_user(new_user, remember=True)
+            flash('Account created.', category='success')
+            return redirect(url_for('auth.info'))
 
     return render_template("sign_up.html", user=current_user)
 
 
+@auth.route('/info', methods=['GET', 'POST'])
+@login_required
+def info():
+    if request.method == 'POST':
+        stance_input = request.form.get('stance')
+        boot_size_input = request.form.get('boot_size')
+        board_size_input = request.form.get('board_size')
 
+        user_id = current_user.id
+        user = User.query.filter_by(id=user_id).first()
+        user.stance = stance_input
+        user.boot_size = boot_size_input
+        user.board_size = board_size_input
+        db.session.commit()
+        return redirect(url_for('views.home'))
+    return render_template("info.html", user=current_user)
 
