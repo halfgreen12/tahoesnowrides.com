@@ -66,6 +66,7 @@ def sign_up():
     return render_template("sign_up.html", user=current_user)
 
 
+# page for user to add their snowboard info after signing up
 @auth.route('/info', methods=['GET', 'POST'])
 @login_required
 def info():
@@ -80,6 +81,7 @@ def info():
         user.boot_size = boot_size_input
         user.board_size = board_size_input
         db.session.commit()
+        flash("Profile complete.", category="success")
         return redirect(url_for('views.home'))
     return render_template("info.html", user=current_user)
 

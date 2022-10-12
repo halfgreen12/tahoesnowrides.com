@@ -1,4 +1,33 @@
 {% extends "base.html" %}
 {% block title %} Home {% endblock %}
 
-{% block content %} <h1 align="center"> This is your home page </h1> {% endblock %}
+{% block content %}
+<h1 align="center">
+    <div class="h2">
+			<h1>Hello, <strong>{{ full_name }}</strong>. Here is your personal snowboard information:</h1>
+			<br>
+			<div class="card" style="width: 18rem;" align="left">
+			  <ul class="list-group list-group-flush">
+				<li class="list-group-item"><strong>Stance:</strong> {{ stance }}</li>
+				<li class="list-group-item"><strong>Boot size:</strong> {{ boot_size }}</li>
+				<li class="list-group-item"><strong>Board size:</strong> {{ board_size }}</li>
+			  </ul>
+			</div>
+			<br>
+	</div>
+	<div class="container">
+		<h3>Check the City you want to Snowboard in:</h3>
+
+			<form action="/home" method="POST">
+				<div class="form-group">
+					<label for="city">
+						<input class="form-control form-control-lg" type="text" name="city" placeholder="Enter a city" id="city" required>
+						<button type="submit" class="btn btn-primary btn-sm">submit</button>
+					</label>
+			  	</div>
+
+				<div class="result"><strong>{{ result }}</strong></div>
+			</form>
+	</div>
+</h1>
+{% endblock %}
