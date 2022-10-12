@@ -33,6 +33,15 @@
                 <div class="navbar-nav">
                     {% if  user.is_authenticated %}
                     <a class="nav-item nav-link" id="home" href="/home">Home</a>
+                      <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Profile
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <a class="dropdown-item" href="/info">Change Info</a>
+                        </div>
+                      </li>
                     <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
                     {% else %}
                     <a class="nav-item nav-link" id="login" href="/">Login</a>
