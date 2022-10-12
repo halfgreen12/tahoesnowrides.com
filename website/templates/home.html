@@ -2,6 +2,12 @@
 {% block title %} Home {% endblock %}
 
 {% block content %}
+<style>
+body  {
+  background-image: url("static/images/snow-mountain.jpg");
+
+}
+</style>
 <h1 align="center">
     <div class="h2">
 			<h1>Hello, <strong>{{ full_name }}</strong>. Here is your personal snowboard information:</h1>
@@ -16,8 +22,7 @@
 			<br>
 	</div>
 	<div class="container">
-		<h3>Check the City you want to Snowboard in:</h3>
-
+		<h3><strong>Check the City you want to Snowboard in:</strong></h3>
 			<form action="/home" method="POST">
 				<div class="form-group">
 					<label for="city">
