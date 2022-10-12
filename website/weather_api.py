@@ -1,24 +1,63 @@
 import requests
+import datetime
 
 
+# weather api function
 def main(city_input):
-    # result = ""
     api_key = "25c740a38cb7334ce07634b493b12e76"
 
-    base_url = "http://api.openweathermap.org/data/2.5/weather?appid=" + api_key + "&q=" + city_input
+    # function to calculate time from 5 days ago and convert to unix time
+    def five_days_ago():
+        current_time = datetime.datetime.now(datetime.timezone.utc)
+        unix_timestamp = int(current_time.timestamp())
+        unix_timestamp_minus_5_days = str(unix_timestamp - 432_000)
+        return unix_timestamp_minus_5_days
 
-    api_link = requests.get(base_url)
-
-    # if api_data["cod"] == 200:
     try:
-        api_data = api_link.json()
-        temperature = api_data['main']["temp"]
-        if temperature <= 290:
-            result = f"{city_input} is a good place to snowboard!"
-        else:
-            result = f"It's too hot to snowboard in {city_input}."
+        # api to convert city to geographical coordinates
+        geocode_url = "http://api.openweathermap.org/geo/1.0/direct?q=" + city_input + "&limit=1&appid=" + api_key
+
+        geo_api_link = requests.get(geocode_url)
+        geo_api_data = geo_api_link.json()
+        print(geo_api_data)
+
+        # store geographical coordinates in variables for main function api call
+        latitude = str(geo_api_data[0]['lat'])
+        longitude = str(geo_api_data[0]['lon'])
+
+    # exception for invalid city
     except Exception as err:
         error_string = str(err)
         print(error_string)
-        result = "Please enter a valid city."
-    return result
+
+    def call_api():
+        # end function if an invalid city was entered
+        if not geo_api_data:
+            result1 = "Please enter a valid city."
+            result2 = ""  # must return empty string because views.home() is expecting two variables
+            return result1, result2
+        else:
+            base_url = "https://api.openweathermap.org/data/2.5/onecall/timemachine?lat=" \
+                       + latitude + "&lon=" + longitude + "&dt="\
+                       + five_days_ago() + "&units=imperial&appid=" + api_key
+
+            api_link = requests.get(base_url)
+            api_data = api_link.json()
+
+            # get the total historical temperature data by indexing two levels into json data
+            total = 0
+            for row in api_data['hourly']:
+                total = total + row['temp']
+
+            # compute the average temperature data and return result to views.home()
+            length = len(api_data['hourly'])
+            average = total / length
+            if average <= 55:
+                result1 = f"{city_input} is a good place to snowboard!"
+            else:
+                result1 = f"It's too hot to snowboard in {city_input}."
+            result2 = f'The average temp. from the last five days is {average:.2f} °F.'
+            print(result1, result2)
+        return result1, result2
+
+    return call_api()
