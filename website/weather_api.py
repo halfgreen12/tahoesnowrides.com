@@ -1,5 +1,6 @@
 import requests
 import datetime
+from pprint import pprint
 
 
 # weather api function
@@ -7,11 +8,11 @@ def main(city_input):
     api_key = "25c740a38cb7334ce07634b493b12e76"
 
     # function to calculate time from 5 days ago and convert to unix time
-    def five_days_ago():
+    def twentyfour_hours_ago():
         current_time = datetime.datetime.now(datetime.timezone.utc)
         unix_timestamp = int(current_time.timestamp())
-        unix_timestamp_minus_5_days = str(unix_timestamp - 432_000)
-        return unix_timestamp_minus_5_days
+        unix_timestamp_minus_24_hours = str(unix_timestamp - 86_400)
+        return unix_timestamp_minus_24_hours
 
     try:
         # api to convert city to geographical coordinates
@@ -19,7 +20,7 @@ def main(city_input):
 
         geo_api_link = requests.get(geocode_url)
         geo_api_data = geo_api_link.json()
-        print(geo_api_data)
+        # print(geo_api_data)
 
         # store geographical coordinates in variables for main function api call
         latitude = str(geo_api_data[0]['lat'])
@@ -34,12 +35,12 @@ def main(city_input):
         # end function if an invalid city was entered
         if not geo_api_data:
             result1 = "Please enter a valid city."
-            result2 = ""  # must return empty string because views.home() is expecting two variables
+            result2 = ""  # must return empty string because views.home() is expecting two variables.
             return result1, result2
         else:
             base_url = "https://api.openweathermap.org/data/2.5/onecall/timemachine?lat=" \
                        + latitude + "&lon=" + longitude + "&dt="\
-                       + five_days_ago() + "&units=imperial&appid=" + api_key
+                       + twentyfour_hours_ago() + "&units=imperial&appid=" + api_key
 
             api_link = requests.get(base_url)
             api_data = api_link.json()
@@ -48,6 +49,7 @@ def main(city_input):
             total = 0
             for row in api_data['hourly']:
                 total = total + row['temp']
+                # pprint(len(api_data['hourly']))
 
             # compute the average temperature data and return result to views.home()
             length = len(api_data['hourly'])
@@ -56,7 +58,7 @@ def main(city_input):
                 result1 = f"{city_input} is a good place to snowboard!"
             else:
                 result1 = f"It's too hot to snowboard in {city_input}."
-            result2 = f'The average temp. from the last five days is {average:.2f} °F.'
+            result2 = f'The average temp. from the last 24 hours is {average:.2f} °F.'
             print(result1, result2)
         return result1, result2
 

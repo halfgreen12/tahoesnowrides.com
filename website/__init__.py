@@ -10,6 +10,7 @@ db = SQLAlchemy()
 # function to initialize Flask and MySQL database
 def create_app():
     app = Flask(__name__)
+    # connect database
     app.config['SECRET_KEY'] = "dfb bfdfbdfbff"
     app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:Warriorswinin6!@localhost/user_info"
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
