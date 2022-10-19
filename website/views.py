@@ -8,6 +8,22 @@ from website import weather_api
 views = Blueprint('views', __name__)
 
 
+ride_posts = [
+    {
+        'author': 'Neil Griffin',
+        'title': 'Ride to Heavenly',
+        'content': "Hey I'm offering a ride to heavenly this Saturday. I've got dogs in the car though. Split gas.",
+        'date_posted': 'October, 15th 2022'
+    },
+    {
+        'author': 'Shaun White',
+        'title': 'Ride to North Lake ',
+        'content': "Hey I'm offering a ride to northstar this Sunday! Leaving at 5:30am from the East Bay.",
+        'date_posted': 'October, 18th 2022'
+    }
+]
+
+
 @views.route('/home', methods=['GET', 'POST'])
 @login_required
 def home():
@@ -28,3 +44,9 @@ def home():
     return render_template("home.html", user=current_user, full_name=full_name,
                            stance=stance, boot_size=boot_size,
                            board_size=board_size, result1=result1, result2=result2)
+
+
+@views.route('/posts', methods=['GET', 'POST'])
+@login_required
+def posts():
+    return render_template("posts.html", user=current_user, ride_posts=ride_posts)

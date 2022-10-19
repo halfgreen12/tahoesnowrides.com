@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %} Ride Posts {% endblock %}
+
+{% block content %}
+
+    {% for ride_post in ride_posts %}
+        <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" href="#">{{ ride_post.author }}</a>
+              <small class="text-muted">{{ ride_post.date_posted }}</small>
+            </div>
+            <h2><a class="article-title">{{ ride_post.title }}</a></h2>
+            <p class="article-content">{{ ride_post.content }}</p>
+          </div>
+        </article>
+    {% endfor %}
+
+{% endblock %}
