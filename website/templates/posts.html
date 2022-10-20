@@ -2,13 +2,15 @@
 {% block title %} Ride Posts {% endblock %}
 
 {% block content %}
-
+    <br>
+    <a type="submit" href="{{ url_for('views.new_post') }}" class="btn btn-info">Make a Post
+    </a>
     {% for ride_post in ride_posts %}
         <article class="media content-section">
           <div class="media-body">
             <div class="article-metadata">
-              <a class="mr-2" href="#">{{ ride_post.author }}</a>
-              <small class="text-muted">{{ ride_post.date_posted }}</small>
+              <a class="mr-2" href="#">{{ ride_post.author.full_name }}</a>
+              <small class="text-muted">{{ ride_post.date_posted.strftime('%B %d, %Y') }}</small>
             </div>
             <h2><a class="article-title">{{ ride_post.title }}</a></h2>
             <p class="article-content">{{ ride_post.content }}</p>

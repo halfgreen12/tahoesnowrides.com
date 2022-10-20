@@ -14,6 +14,7 @@
           id="email"
           name="email"
           placeholder="Enter email"
+          value="{{ request.form['email'] }}"
         />
     </div>
     <div class="form-group">
@@ -24,6 +25,7 @@
           id="fullName"
           name="fullName"
           placeholder="Enter first and last name"
+          value="{{ request.form['fullName'] }}"
         />
     </div>
       <div class="form-group">
@@ -34,7 +36,7 @@
           id="password1"
           name="password1"
           placeholder="Enter password"
-     />
+        />
     </div>
     <div class="form-group">
         <label for="password2">Password (Confirm)</label>

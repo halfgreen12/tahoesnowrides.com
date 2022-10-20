@@ -1,27 +1,13 @@
-from flask import Blueprint, render_template
+from .models import Posts
+from . import db
+
+from flask import Blueprint, render_template, flash, request, redirect, url_for
 from flask_login import login_required, current_user
-from flask import request
 
 from website import weather_api
 
 
 views = Blueprint('views', __name__)
-
-
-ride_posts = [
-    {
-        'author': 'Neil Griffin',
-        'title': 'Ride to Heavenly',
-        'content': "Hey I'm offering a ride to heavenly this Saturday. I've got dogs in the car though. Split gas.",
-        'date_posted': 'October, 15th 2022'
-    },
-    {
-        'author': 'Shaun White',
-        'title': 'Ride to North Lake ',
-        'content': "Hey I'm offering a ride to northstar this Sunday! Leaving at 5:30am from the East Bay.",
-        'date_posted': 'October, 18th 2022'
-    }
-]
 
 
 @views.route('/home', methods=['GET', 'POST'])
@@ -49,4 +35,20 @@ def home():
 @views.route('/posts', methods=['GET', 'POST'])
 @login_required
 def posts():
+    ride_posts = Posts.query.all()
     return render_template("posts.html", user=current_user, ride_posts=ride_posts)
+
+
+@views.route('/posts/new', methods=['GET', 'POST'])
+def new_post():
+    if request.method == 'POST':
+        title = request.form.get('title')
+        content = request.form.get('content')
+
+        post = Posts(title=title, content=content, author=current_user)
+        db.session.add(post)
+        db.session.commit()
+        flash('Your post has been created!', 'success')
+        return redirect(url_for('views.posts'))
+
+    return render_template("create_post.html", user=current_user)
