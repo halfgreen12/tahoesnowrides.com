@@ -35,7 +35,8 @@ def home():
 @views.route('/posts', methods=['GET', 'POST'])
 @login_required
 def posts():
-    ride_posts = Posts.query.all()
+    page = request.args.get('page', 1, type=int)
+    ride_posts = Posts.query.order_by(Posts.date_posted.desc()).paginate(page=page, per_page=5)
     return render_template("posts.html", user=current_user, ride_posts=ride_posts)
 
 

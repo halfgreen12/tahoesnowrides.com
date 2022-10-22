@@ -7,8 +7,8 @@
        href="{{ url_for('views.new_post') }}"
        class="btn btn-info">Make a Post
     </a>
-
-    {% for ride_post in ride_posts %}
+    {# loop through ride posts and display them on the page. With pagination #}
+    {% for ride_post in ride_posts.items %}
         <article class="media content-section">
           <div class="media-body">
             <div class="article-metadata">
@@ -21,5 +21,15 @@
           </div>
         </article>
     {% endfor %}
+    {% for page_num in ride_posts.iter_pages() %}
+    {% if page_num %}
+        {% if ride_posts.page == page_num %}
+            <a class="btn btn-info mb-5" href="{{ url_for('views.posts', page=page_num) }}">{{ page_num }}</a>
+        {% else %}
+            <a class="btn btn-outline-info mb-5" href="{{ url_for('views.posts', page=page_num) }}">{{ page_num }}</a>
+        {% endif %}
+    {% else %}
 
+    {% endif %}
+    {% endfor %}
 {% endblock %}
