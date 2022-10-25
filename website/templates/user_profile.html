@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %} Home {% endblock %}
+
+{% block content %}
+<style>
+body  {
+  background-image: url("static/images/snow-mountain.jpg");
+}
+</style>
+<h1 align="center">
+    <div class="h2">
+			<h1><strong>{{ user_clicked_on.full_name }}'s</strong> profile:</h1>
+			<br>
+			<div class="card" style="width: 18rem;" align="left">
+			  <ul class="list-group list-group-flush">
+				<li class="list-group-item"><strong>Stance:</strong> {{ user_clicked_on.stance }}</li>
+				<li class="list-group-item"><strong>Boot size:</strong> {{ user_clicked_on.boot_size }}</li>
+				<li class="list-group-item"><strong>Board size:</strong> {{ user_clicked_on.board_size }}</li>
+			  </ul>
+			</div>
+			<br>
+	</div>
+</h1>
+{% endblock %}

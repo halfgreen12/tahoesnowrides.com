@@ -1,4 +1,4 @@
-from .models import Posts
+from .models import Posts, User
 from . import db
 
 from flask import Blueprint, render_template, flash, request, redirect, url_for, abort
@@ -76,3 +76,10 @@ def delete_post(post_id):
     return redirect(url_for('views.posts'))
 
 
+@views.route('/user/<user_clicked_on>', methods=['GET'])
+@login_required
+def user_profile(user_clicked_on):
+    user_clicked_on = User.query.filter_by(id=user_clicked_on).first_or_404()
+    if user_clicked_on.id == current_user.id:
+        return redirect(url_for('views.home'))
+    return render_template("user_profile.html", user=current_user, user_clicked_on=user_clicked_on)
