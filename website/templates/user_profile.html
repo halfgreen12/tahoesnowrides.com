@@ -2,29 +2,8 @@
 {% block title %} Home {% endblock %}
 
 {% block content %}
-<!--<style>-->
-<!--body  {-->
-<!--  background-image: url("static/images/snow-mountain.jpg");-->
-<!--}-->
-<!--</style>-->
-<!--<h1 align="center">-->
-<!--    <div class="h2">-->
-<!--			<h1><strong>{{ user_clicked_on.full_name }}'s</strong> profile:</h1>-->
-<!--			<br>-->
-<!--			<div class="card" style="width: 18rem;" align="left">-->
-<!--			  <ul class="list-group list-group-flush">-->
-<!--				<li class="list-group-item"><strong>Stance:</strong> {{ user_clicked_on.stance }}</li>-->
-<!--				<li class="list-group-item"><strong>Boot size:</strong> {{ user_clicked_on.boot_size }}</li>-->
-<!--				<li class="list-group-item"><strong>Board size:</strong> {{ user_clicked_on.board_size }}</li>-->
-<!--			  </ul>-->
-<!--			</div>-->
-<!--			<br>-->
-<!--	</div>-->
-<!--</h1>-->
-
 
 <section class="vh-100" style="background-color: #f4f5f7;">
-<!--  <div class="container py-5 h-100">-->
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col col-lg-6 mb-4 mb-lg-0">
         <div class="card mb-3" style="border-radius: .5rem;">
@@ -32,44 +11,39 @@
             <div class="col-md-4 mt-8 align-self-center text-center">
               <h4><strong>{{ user_clicked_on.full_name }}</strong></h4>
             </div>
-            <div class="col-md-8">
-              <div class="card-body p-4">
-                <h6>Info</h6>
-                <hr class="mt-0 mb-4">
-                <div class="row pt-1">
-                  <div class="col-6 mb-3">
-                    <h6><strong>Ski or Snowboard</strong></h6>
-                    <p class="text-muted">{{ user_clicked_on.skier_or_snowboarder }}</p>
+              <div class="col-md-8">
+                <div class="card-body p-4">
+                  <h6>Info</h6>
+                  <hr class="mt-0 mb-4">
+                  <div class="row pt-1">
+                    <div class="col-6 mb-3">
+                      <h6><strong>Ski or Snowboard</strong></h6>
+                      <p class="text-muted">{{ user_clicked_on.skier_or_snowboarder }}</p>
+                    </div>
+                    <div class="col-6 mb-3">
+                      <h6><strong>Skill Level</strong></h6>
+                      <p class="text-muted">{{ user_clicked_on.skill_level }}</p>
+                    </div>
                   </div>
-                  <div class="col-6 mb-3">
-                    <h6><strong>Skill Level</strong></h6>
-                    <p class="text-muted">{{ user_clicked_on.skill_level }}</p>
+                  <h6><strong>Bio</strong></h6>
+                  <hr class="mt-0 mb-4">
+                  <div class="row pt-1">
+                    <div class="col">
+                      <p class="text-muted">{{ user_clicked_on.bio }}</p>
+                    </div>
+                    </div>
+                </div>
+                  <hr class="mt-0 mb-4">
+                  <div class="col mb-4 text-center">
+                    <a href="{{ user_clicked_on.facebook_profile }}">Message on Facebook</a>
                   </div>
-                </div>
-                <h6><strong>Bio</strong></h6>
-                <hr class="mt-0 mb-4">
-                <div class="row pt-1">
-                  <div class="col">
-                    <p class="text-muted">{{ user_clicked_on.bio }}</p>
-                  </div>
-                  </div>
-                </div>
-              <hr class="mt-0 mb-4">
-              <div class="col mb-4 text-center">
-              <a href="{{ user_clicked_on.facebook_profile }}">Message on Facebook</a>
-
-                </div>
-                <div class="d-flex justify-content-start">
-                </div>
+                    <div class="d-flex justify-content-start"></div>
               </div>
-            </div>
           </div>
         </div>
       </div>
     </div>
-<!--  </div>-->
 </section>
-
 
 {% endblock %}
 
