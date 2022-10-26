@@ -71,15 +71,17 @@ def sign_up():
 @login_required
 def info():
     if request.method == 'POST':
-        stance_input = request.form.get('stance')
-        boot_size_input = request.form.get('boot_size')
-        board_size_input = request.form.get('board_size')
+        skier_or_snowboarder = request.form.get('skier_or_snowboarder')
+        skill_level = request.form.get('skill_level')
+        bio = request.form.get('bio')
+        facebook_profile = request.form.get('facebook_profile')
 
         user_id = current_user.id
         user = User.query.filter_by(id=user_id).first()
-        user.stance = stance_input
-        user.boot_size = boot_size_input
-        user.board_size = board_size_input
+        user.skier_or_snowboarder = skier_or_snowboarder
+        user.skill_level = skill_level
+        user.bio = bio.strip()
+        user.facebook_profile = facebook_profile.strip()
         db.session.commit()
         flash("Profile complete.", category="success")
         return redirect(url_for('views.home'))
