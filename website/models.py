@@ -10,9 +10,9 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(150))
     full_name = db.Column(db.String(150))
 
-    stance = db.Column(db.String(50))
-    board_size = db.Column(db.String(50))
-    boot_size = db.Column(db.String(50))
+    skier_or_snowboarder = db.Column(db.String(50))
+    skill_level = db.Column(db.String(50))
+    bio = db.Column(db.String(1000))
 
     posts = db.relationship('Posts', backref='author', lazy=True)
 

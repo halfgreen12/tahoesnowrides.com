@@ -66,20 +66,21 @@ def sign_up():
     return render_template("sign_up.html", user=current_user)
 
 
+# TODO: add link for facebook profile
 # page for user to add their snowboard info after signing up
 @auth.route('/info', methods=['GET', 'POST'])
 @login_required
 def info():
     if request.method == 'POST':
-        stance_input = request.form.get('stance')
-        boot_size_input = request.form.get('boot_size')
-        board_size_input = request.form.get('board_size')
+        skier_or_snowboarder = request.form.get('skier_or_snowboarder')
+        skill_level = request.form.get('skill_level')
+        bio = request.form.get('bio')
 
         user_id = current_user.id
         user = User.query.filter_by(id=user_id).first()
-        user.stance = stance_input
-        user.boot_size = boot_size_input
-        user.board_size = board_size_input
+        user.skier_or_snowboarder = skier_or_snowboarder
+        user.skill_level = skill_level
+        user.bio = bio
         db.session.commit()
         flash("Profile complete.", category="success")
         return redirect(url_for('views.home'))

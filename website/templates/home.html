@@ -9,19 +9,22 @@ body  {
 </style>
 <h1 align="center">
     <div class="h2">
-			<h1>Hello, <strong>{{ full_name }}</strong>. Here is your personal snowboard information:</h1>
+			<h1>Hello, <strong>{{ full_name }}</strong>. Here is your ski/snowboard information:</h1>
 			<br>
-			<div class="card" style="width: 18rem;" align="left">
+			<div class="card bg-light" style="width: 50rem;" align="left">
 			  <ul class="list-group list-group-flush">
-				<li class="list-group-item"><strong>Stance:</strong> {{ stance }}</li>
-				<li class="list-group-item"><strong>Boot size:</strong> {{ boot_size }}</li>
-				<li class="list-group-item"><strong>Board size:</strong> {{ board_size }}</li>
+				<li class="list-group-item"><strong>Skier or Snowboarder:</strong> {{ skier_or_snowboarder }}</li>
+				<li class="list-group-item"><strong>Skill Level:</strong> {{ skill_level }}</li>
+				<li class="list-group-item" row="3"><strong>Bio:</strong> <small>{{ bio }}</small></li>
 			  </ul>
 			</div>
 			<br>
 	</div>
 	<div class="container">
-		<h3><strong>Check the City you want to Snowboard in:</strong></h3>
+		<div class="card bg-lgiht" style="width: 65rem;">
+			<div class="col mt-3 mb-3">
+			<h2><strong>Check the City you want to Ski or Snowboard in:</strong></h2>
+				</div>
 			<form action="/home" method="POST">
 				<div class="form-group">
 					<label for="city">
@@ -34,6 +37,7 @@ body  {
 				<div class="result1"><strong>{{ result1 }}</strong></div>
 				<div class="result2"><strong>{{ result2 }}</strong></div>
 			</form>
+			</div>
 	</div>
 </h1>
 {% endblock %}

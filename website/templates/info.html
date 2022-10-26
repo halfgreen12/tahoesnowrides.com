@@ -5,43 +5,32 @@
 
 <form method="POST">
     <br>
-    <h3 align="center">Enter your snowboard info</h3>
+    <h3 align="center">Enter your info</h3>
         <div class="form-group">
-          <label for="stance">Stance</label>
-          <select class="form-control" name="stance" id="stance">
-            <option value="" disabled selected>Select your stance</option>
-            <option>Regular</option>
-            <option>Goofy</option>
+          <label for="skier_or_snowboarder">Skier or Snowboarder</label>
+          <select class="form-control" name="skier_or_snowboarder" id="skier_or_snowboarder">
+            <option value="" disabled selected>Select your preference</option>
+            <option>Skier</option>
+            <option>Snowboarder</option>
+              <option>Both</option>
           </select>
         </div>
         <div class="form-group">
-          <label for="boot_size">Boot Size</label>
-            <select class="form-control" name="boot_size" id="boot_size">
-              <option value="" disabled selected>Select your boot size</option>
-              <option>6</option>
-              <option>6.5</option>
-              <option>7</option>
-              <option>7.5</option>
-              <option>8</option>
-              <option>8.5</option>
-              <option>9</option>
-              <option>9.5</option>
-              <option>10</option>
-              <option>10.5</option>
-              <option>11</option>
-              <option>11.5</option>
-              <option>12</option>
-              <option>12.5</option>
-              <option>13</option>
+          <label for="skill_level">Skill Level</label>
+            <select class="form-control" name="skill_level" id="skill_level">
+              <option value="" disabled selected>Select your skill level</option>
+              <option>Beginner</option>
+              <option>Intermediate</option>
+              <option>Advanced</option>
             </select>
         </div>
         <div class="form-group">
-          <label for="board_size">Board Size</label>
-          <input type="text"
-                 class="form-control"
-                 name="board_size"
-                 id="board_size"
-                 placeholder="Enter a number ex. 153,154,155">
+          <label for="bio">Bio</label>
+          <textarea class="form-control"
+                 name="bio"
+                 id="bio"
+                 placeholder="Enter some info about yourself"
+                 rows="3"></textarea>
         </div>
     <br />
     <button type="submit" class="btn btn-primary">Submit</button>
