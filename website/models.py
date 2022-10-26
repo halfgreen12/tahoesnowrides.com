@@ -13,6 +13,7 @@ class User(db.Model, UserMixin):
     skier_or_snowboarder = db.Column(db.String(50))
     skill_level = db.Column(db.String(50))
     bio = db.Column(db.String(1000))
+    facebook_profile = db.Column(db.String(200))
 
     posts = db.relationship('Posts', backref='author', lazy=True)
 
