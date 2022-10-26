@@ -7,7 +7,7 @@ body  {
   background-image: url("static/images/snow-mountain.jpg");
 }
 </style>
-<h1 align="center">
+<div align="center">
     <div class="h2">
 			<h1>Hello, <strong>{{ full_name }}</strong>. Here is your ski/snowboard information:</h1>
 			<br>
@@ -30,6 +30,7 @@ body  {
 					<label for="city">
 						<input class="form-control form-control-lg" type="text" name="city"
 							   placeholder="Enter a city" id="city" required>
+						<br>
 						<button type="submit" class="btn btn-primary btn-sm">submit</button>
 					</label>
 			  	</div>
@@ -39,5 +40,6 @@ body  {
 			</form>
 			</div>
 	</div>
-</h1>
+</div>
+
 {% endblock %}
