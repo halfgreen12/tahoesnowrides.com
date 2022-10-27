@@ -1,6 +1,8 @@
 from . import db
 from flask_login import UserMixin
 from datetime import datetime
+from itsdangerous import URLSafeTimedSerializer as Serializer
+from flask import current_app
 
 
 # User database and snowboard info
@@ -16,6 +18,19 @@ class User(db.Model, UserMixin):
     facebook_profile = db.Column(db.String(200))
 
     posts = db.relationship('Posts', backref='author', lazy=True)
+
+    def get_reset_token(self):
+        s = Serializer(current_app.config['SECRET_KEY'])
+        return s.dumps(self.id)
+
+    @staticmethod
+    def verify_reset_token(token):
+        s = Serializer(current_app.config['SECRET_KEY'])
+        try:
+            user_id = s.loads(token, max_age=60)
+        except:
+            return None
+        return User.query.get(user_id)
 
 
 class Posts(db.Model):
