@@ -12,7 +12,8 @@
         <article class="media content-section">
           <div class="media-body">
             <div class="article-metadata">
-              <a class="mr-2" href="#">{{ ride_post.author.full_name }}</a>
+              <a class="mr-2" href="{{ url_for('views.user_profile', user_clicked_on=ride_post.author.id) }}">
+                  {{ ride_post.author.full_name }}</a>
               <small class="text-muted">{{ ride_post.date_posted.strftime('%B %d, %Y') }}</small>
             </div>
             <h2><a class="article-title"
