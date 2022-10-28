@@ -105,7 +105,7 @@ If you did not make this request then simply ignore this email and no changes wi
     mail.send(msg)
 
 
-# reset password (uses function defined in models.User class)
+# 1st page for resetting password (uses function defined in models.User class)
 @auth.route('/reset_password', methods=['GET', 'POST'])
 def reset_request():
     if current_user.is_authenticated:
@@ -122,7 +122,7 @@ def reset_request():
     return render_template('reset_request.html', user=current_user)
 
 
-# page for resetting password after clicking on email link (token)
+# 2nd page for resetting password after clicking on email link (token)
 @auth.route('/reset_password/<token>', methods=['GET', 'POST'])
 def reset_token(token):
     if current_user.is_authenticated:
