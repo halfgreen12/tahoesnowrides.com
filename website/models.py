@@ -21,6 +21,7 @@ class User(db.Model, UserMixin):
 
     def get_reset_token(self):
         s = Serializer(current_app.config['SECRET_KEY'])
+        print(s.dumps(self.id))
         return s.dumps(self.id)
 
     @staticmethod
@@ -28,6 +29,7 @@ class User(db.Model, UserMixin):
         s = Serializer(current_app.config['SECRET_KEY'])
         try:
             user_id = s.loads(token, max_age=60)
+            print(user_id)
         except:
             return None
         return User.query.get(user_id)
