@@ -34,10 +34,11 @@ def create_app():
     from .auth import auth
     from .views import views
     from .ride_posts import ride_posts_blueprint
-
+    from .error_handlers import errors
     app.register_blueprint(auth, url_prefix='/')
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(ride_posts_blueprint, url_prefix='/')
+    app.register_blueprint(errors, url_prefix='/')
 
     from .models import User
 
