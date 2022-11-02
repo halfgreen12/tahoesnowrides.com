@@ -3,20 +3,26 @@
 
 {% block content %}
 
-<form method="POST">
-    <br>
-    <h3 align="center">Reset Password</h3>
-    <div class="form-group">
-        <label for="email">Email Address</label>
-        <input
-          type="email"
-          class="form-control"
-          id="email"
-          name="email"
-          placeholder="Enter email associated with your account"
-        />
+<div class="row">
+  <div class="col"></div>
+    <div class="col-8">
+        <form method="POST">
+            <br>
+            <h3 align="center">Reset Password</h3>
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  name="email"
+                  placeholder="Enter email associated with your account"
+                />
+            </div>
+            <button type="submit" class="btn btn-primary">Reset Password</button>
+        </form>
     </div>
-    <button type="submit" class="btn btn-primary">Reset Password</button>
-</form>
+  <div class="col"></div>
+</div>
 
 {% endblock %}
