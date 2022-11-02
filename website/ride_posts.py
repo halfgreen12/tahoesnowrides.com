@@ -38,7 +38,7 @@ def single_post(post_id):
     return render_template("single_post.html", user=current_user, ride_post=ride_post)
 
 
-@ride_posts_blueprint.route('/single_post/<int:post_id>/delete', methods=['POST'])
+@ride_posts_blueprint.route('/single_post/<int:post_id>/delete', methods=['GET', 'POST'])
 @login_required
 def delete_post(post_id):
     ride_post_to_delete = Posts.query.get_or_404(post_id)
