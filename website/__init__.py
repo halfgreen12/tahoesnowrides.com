@@ -11,8 +11,6 @@ mail = Mail()
 
 db_connection = os.environ.get('NEW_FLASK_SNOWBOARD_DB_CONNECTION')
 email_password = os.environ.get('NEW_FLASK_SNOWBOARD_EMAIL_PASSWORD')
-print(db_connection)
-print(email_password)
 
 
 # function to initialize Flask and MySQL database
