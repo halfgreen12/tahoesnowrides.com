@@ -4,11 +4,15 @@ from flask_login import LoginManager
 from flask_mail import Mail
 import secrets
 import string
+import os
 
 db = SQLAlchemy()
 mail = Mail()
 
-# DB_NAME = "database.db"
+db_connection = os.environ.get('NEW_FLASK_SNOWBOARD_DB_CONNECTION')
+email_password = os.environ.get('NEW_FLASK_SNOWBOARD_EMAIL_PASSWORD')
+print(db_connection)
+print(email_password)
 
 
 # function to initialize Flask and MySQL database
@@ -19,7 +23,7 @@ def create_app():
         (secrets.choice(string.ascii_letters + string.digits + string.punctuation) for i in range(15)))
 
     # connect database
-    app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:Warriorswinin6!@localhost/user_info"
+    app.config['SQLALCHEMY_DATABASE_URI'] = db_connection
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.init_app(app)
 
@@ -28,7 +32,7 @@ def create_app():
     app.config['MAIL_PORT'] = '587'
     app.config['MAIL_USE_TLS'] = True
     app.config['MAIL_USERNAME'] = 'snow.rides530@gmail.com'
-    app.config['MAIL_PASSWORD'] = 'ymncwlqhjzbwbtwg'
+    app.config['MAIL_PASSWORD'] = email_password
     mail.init_app(app)
 
     from .auth import auth
