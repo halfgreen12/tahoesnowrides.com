@@ -6,8 +6,8 @@ import os
 
 # weather api function
 def main(city_input):
-    api_key = os.environ.get('NEW_FLASK_SNOWBOARD_OPENWEATHER_KEY')
-
+    api_key = os.environ.get('NEW_FLASK_SNOWBOARD_OPENWEATHER_API_KEY')
+    print(api_key)
     # function to calculate time from 5 days ago and convert to unix time
     def twentyfour_hours_ago():
         current_time = datetime.datetime.now(datetime.timezone.utc)
@@ -30,7 +30,6 @@ def main(city_input):
     # exception for invalid city
     except Exception as err:
         error_string = str(err)
-        print(error_string)
 
     def call_api():
         # end function if an invalid city was entered
