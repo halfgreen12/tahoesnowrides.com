@@ -1,11 +1,12 @@
 import requests
 import datetime
 from pprint import pprint
+import os
 
 
 # weather api function
 def main(city_input):
-    api_key = "25c740a38cb7334ce07634b493b12e76"
+    api_key = os.environ.get('NEW_FLASK_SNOWBOARD_OPENWEATHER_KEY')
 
     # function to calculate time from 5 days ago and convert to unix time
     def twentyfour_hours_ago():
@@ -49,7 +50,7 @@ def main(city_input):
             total = 0
             for row in api_data['hourly']:
                 total = total + row['temp']
-                # pprint(len(api_data['hourly']))
+            # pprint(api_data)
 
             # compute the average temperature data and return result to views.home()
             length = len(api_data['hourly'])
@@ -59,7 +60,7 @@ def main(city_input):
             else:
                 result1 = f"It's too hot to snowboard in {city_input}."
             result2 = f'The average temp. from the last 24 hours is {average:.2f} °F.'
-            print(result1, result2)
+            # print(result1, result2)
         return result1, result2
 
     return call_api()
