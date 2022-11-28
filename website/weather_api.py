@@ -2,12 +2,14 @@ import requests
 import datetime
 from pprint import pprint
 import os
+import json
 
+with open('/etc/tahoe_rides_config.json') as config_file:
+        config = json.load(config_file)
 
 # weather api function
 def main(city_input):
-    api_key = os.environ.get('NEW_FLASK_SNOWBOARD_OPENWEATHER_API_KEY')
-    print(api_key)
+    api_key = config.get('NEW_FLASK_SNOWBOARD_OPENWEATHER_API_KEY')
     # function to calculate time from 5 days ago and convert to unix time
 
     def twentyfour_hours_ago():
@@ -55,7 +57,7 @@ def main(city_input):
             # compute the average temperature data and return result to views.home()
             length = len(api_data['hourly'])
             average = total / length
-            if average <= 55:
+            if average <= 45:
                 result1 = f"{city_input} is a good place to snowboard!"
             else:
                 result1 = f"It's too hot to snowboard in {city_input}."

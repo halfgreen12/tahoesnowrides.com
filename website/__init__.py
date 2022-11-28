@@ -5,20 +5,24 @@ from flask_mail import Mail
 import secrets
 import string
 import os
+import json
+
+with open('/etc/tahoe_rides_config.json') as config_file:
+	config = json.load(config_file)
+
 
 db = SQLAlchemy()
 mail = Mail()
 
-db_connection = os.environ.get('NEW_FLASK_SNOWBOARD_DB_CONNECTION')
-email_password = os.environ.get('NEW_FLASK_SNOWBOARD_EMAIL_PASSWORD')
+db_connection = config.get('NEW_FLASK_SNOWBOARD_DB_CONNECTION')
+email_password = config.get('NEW_FLASK_SNOWBOARD_EMAIL_PASSWORD')
 
 
 # function to initialize Flask and MySQL database
 def create_app():
     app = Flask(__name__)
 
-    app.secret_key = ''.join(
-        (secrets.choice(string.ascii_letters + string.digits + string.punctuation) for i in range(15)))
+    app.secret_key = '12345'
 
     # connect database
     app.config['SQLALCHEMY_DATABASE_URI'] = db_connection
@@ -42,7 +46,9 @@ def create_app():
     app.register_blueprint(ride_posts_blueprint, url_prefix='/')
     app.register_blueprint(errors, url_prefix='/')
 
-    from .models import User
+    from .models import User, Posts
+
+    create_database(app)
 
     login_manager = LoginManager()
     login_manager.login_view = 'auth.login'
@@ -55,9 +61,9 @@ def create_app():
     return app
 
 # code to be used to create a new database
-# def create_database(app):
-#     with app.app_context():
-#         db.create_all()
+def create_database(app):
+    with app.app_context():
+        db.create_all()
 #     # if not path.exists('website/' + DB_NAME):
 #     #     db.create_all(app=app)
 #         print('Created Database!')
